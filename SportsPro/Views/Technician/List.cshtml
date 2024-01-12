@@ -1,0 +1,28 @@
+﻿@model List<Technician>
+
+<table>
+    <tbody>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+    </tr>
+    @foreach(Technician technician in Model)
+    {
+        <tr>
+            <td>@technician.Name</td>
+            <td>@technician.Email</td>
+            <td>@technician.Phone</td>
+            <td>
+                <a asp-controller="Technician" asp-action="AddEdit"
+                    asp-route-id="@technician.TechnicianID">EDIT</a>
+            </td>
+            <td>
+                <a asp-controller="Technician" asp-action="Delete"
+                    asp-route-id="@technician.TechnicianID">DELETE</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<a asp-controller="Technician" asp-action="AddEdit">ADD Technician</a>
