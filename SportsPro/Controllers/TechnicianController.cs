@@ -22,37 +22,45 @@ namespace SportsPro.Controllers
             return View(technicians);
         }
         [HttpGet]
-        public IActionResult AddEdit(int id)
+        public IActionResult Add()
         {
-            Technician technician = context.Technicians.Find(id);
-            if (technician == null)
-            {
-                ViewBag.action = "add";
-                return View(technician);
-            }
-            else
-            {
-                ViewBag.action = "edit";
-                return View(technician);
-            }
+            ViewBag.Action = "Add";
+            Technician technician = new Technician(); 
+            return View("AddEdit",technician);
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Technician technician = context.Technicians.Find(id); 
+            ViewBag.Action = "Edit";
+            return View("AddEdit",technician);
            
         }
         [HttpPost]
         public IActionResult AddEdit(Technician technician)
         {
-            if (ViewBag.action.equals("add"))
+            if (ModelState.IsValid)
             {
-                context.Technicians.Add(technician);
-                return RedirectToAction("List", "Technician");
-            }
-            else if(ViewBag.action.equals("edit"))
-            {
-                context.Technicians.Update(technician);
-                return RedirectToAction("List", "Technician");
+                //if a tech was not found the id will be zero. The submited technician needs to be added
+                if (technician.TechnicianID == 0)
+                {
+
+                    context.Technicians.Add(technician);
+                    
+                }
+                //else the technician is in the database and needs to be added
+                else
+                {
+                    context.Technicians.Update(technician);
+                    
+                   
+                }
+                context.SaveChanges();
+                return RedirectToAction("List");
             }
             else
             {
-                return RedirectToAction("List", "Technician");
+                return View("AddEdit",technician);
             }
         }
         [HttpGet]
@@ -66,8 +74,6 @@ namespace SportsPro.Controllers
             }
             else
             {
-                context.Technicians.Remove(technician);
-                context.SaveChanges();
 
                 return View(technician);
             }
@@ -77,13 +83,13 @@ namespace SportsPro.Controllers
         {
             if(technician == null)
             {
-                return RedirectToAction("List", "Technician");
+                return RedirectToAction("List");
             }
             else
             {
                 context.Technicians.Remove(technician);
                 context.SaveChanges();
-                return RedirectToAction("List", "Technician");
+                return RedirectToAction("List");
             }
         }
     }

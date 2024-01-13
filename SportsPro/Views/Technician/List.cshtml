@@ -1,6 +1,6 @@
 ﻿@model List<Technician>
 
-<table>
+<table class="table table-bordered table-striped">
     <tbody>
     <tr>
         <th>Name</th>
@@ -14,15 +14,17 @@
             <td>@technician.Email</td>
             <td>@technician.Phone</td>
             <td>
-                <a asp-controller="Technician" asp-action="AddEdit"
-                    asp-route-id="@technician.TechnicianID">EDIT</a>
+                <a asp-controller="Technician" asp-action="Edit"
+                       asp-route-id="@technician.TechnicianID" class="btn btn-primary">EDIT</a>
             </td>
             <td>
                 <a asp-controller="Technician" asp-action="Delete"
-                    asp-route-id="@technician.TechnicianID">DELETE</a>
+                       asp-route-id="@technician.TechnicianID" class="btn btn-primary">
+                        DELETE
+                </a>
             </td>
         </tr>
     }
     </tbody>
 </table>
-<a asp-controller="Technician" asp-action="AddEdit">ADD Technician</a>
+<a asp-controller="Technician" asp-action="Add" class="btn btn-primary">ADD Technician</a>
