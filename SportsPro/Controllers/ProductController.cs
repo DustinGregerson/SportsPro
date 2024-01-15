@@ -57,11 +57,38 @@ namespace SportsPro.Controllers
             else
             {
                 return View("AddEdit", product);
+            }  
+        }
+
+        //here is the for Delete 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Product product = context.Products.Find(id);
+
+            if (product == null)
+            {
+                return RedirectToAction("List", "Products");
             }
+            else
+            {
 
-           //Delete  
-
-     
+                return View(product);
+            }
+        }
+        [HttpPost]
+        public IActionResult Delete(Product product)
+        {
+            if (product == null)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                context.Products.Remove(product);
+                context.SaveChanges();
+                return RedirectToAction("List");
+            }
         }
     }
 }
