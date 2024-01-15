@@ -1,7 +1,33 @@
 ﻿@model List<Product>
-@{
-    foreach( Product i in Model)
-    {
-        <div>@i.Name</div>
-    }
-}
+
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>ReleaseDate</th>
+
+        </tr>
+        @foreach (Product product in Model)
+        {
+            <tr>
+                <td>@product.Code</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.ReleaseDate</td>
+                <td>
+                    <a asp-controller="Product" asp-action="Edit"
+                       asp-route-id="@product.ProductID" class="btn btn-primary">EDIT</a>
+                </td>
+                <td>
+                    <a asp-controller="Technician" asp-action="Delete"
+                       asp-route-id="@product.ProductID" class="btn btn-primary">
+                        DELETE
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Product" asp-action="Add" class="btn btn-primary">ADD Product</a>
