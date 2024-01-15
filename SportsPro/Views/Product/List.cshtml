@@ -12,16 +12,16 @@
         @foreach (Product product in Model)
         {
             <tr>
-                <td>@product.Code</td>
+                <td>@product.ProductCode</td>
                 <td>@product.Name</td>
-                <td>@product.Price</td>
+                <td>@product.YearlyPrice</td> 
                 <td>@product.ReleaseDate</td>
                 <td>
                     <a asp-controller="Product" asp-action="Edit"
                        asp-route-id="@product.ProductID" class="btn btn-primary">EDIT</a>
                 </td>
                 <td>
-                    <a asp-controller="Technician" asp-action="Delete"
+                    <a asp-controller="Product" asp-action="Delete"
                        asp-route-id="@product.ProductID" class="btn btn-primary">
                         DELETE
                     </a>

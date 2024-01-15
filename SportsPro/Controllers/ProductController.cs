@@ -20,5 +20,48 @@ namespace SportsPro.Controllers
 
             return View(products);
         }
+        //Adding new Product to table
+        [HttpGet]
+        public IActionResult Add()
+        {
+            ViewBag.Action = "Add";
+            Product product = new Product();
+            return View("AddEdit", product);
+        }
+        //Edit the product
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Product product = context.Products.Find(id);
+            ViewBag.Action = "Edit";
+            return View("AddEdit", product);
+        }
+
+        [HttpPost]
+        public IActionResult AddEdit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                if (product.ProductID == 0)
+                {
+                    context.Products.Add(product);
+                }
+                // the product from database have to Added
+                else
+                {
+                    context.Products.Update(product);
+                }
+                context.SaveChanges();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return View("AddEdit", product);
+            }
+
+           //Delete  
+
+     
+        }
     }
 }
