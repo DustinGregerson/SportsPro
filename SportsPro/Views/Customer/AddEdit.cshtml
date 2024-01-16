@@ -1,0 +1,62 @@
+﻿@model Customer
+
+@{
+    string title = ViewBag.Action + " Customer";
+    ViewBag.Title = title;    
+}
+<h1>@ViewBag.Title</h1>
+<form asp-action="AddEdit" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <!--First Name-->
+    <div class="form-group">
+        <label asp-for="FirstName">First Name</label> 
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <!--Last  Name-->
+    <div class="form-group">
+        <label asp-for="LastName">Last Name</label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    <!--Address-->
+    <div class="form-group">
+        <label asp-for="Address">Address</label>
+        <input asp-for="Address" class="form-control" />
+    </div>
+    <!--City-->
+    <div class="form-group">
+        <label asp-for="City">City</label>
+        <input asp-for="City" class="form-control" />
+    </div>
+    <!--State-->
+    <div class="form-group">
+        <label asp-for="State">State</label>
+        <input asp-for="State" class="form-control" />
+    </div>
+   
+    <!--Postal Code-->
+    <div class="form-group">
+        <label asp-for="PostalCode">Postal Code</label>
+        <input asp-for="PostalCode" class="form-control" />
+    </div>
+    <!--Country-->
+    <div class="form-group">
+        <label asp-for="Country">Country</label>
+    <input asp-for="Country" class="form-control" />
+    </div>
+    <!--Email-->
+    <div class="form-group">
+    <label asp-for="Email">Email</label>
+    <input asp-for="Email" class="form-control" />
+    </div>
+    <!--Phone-->
+    <div class="form-group">
+        <label asp-for="Phone">Phone</label>
+        <input asp-for="Phone" class="form-control" />
+    </div>
+    
+    
+    <input asp-for="CustomerID" type=hidden />
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a asp-action="List" class="btn btn-primary">Cancel</a>
+</form>

@@ -1,0 +1,46 @@
+﻿@model List<Customer>
+
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>City</th>
+          
+
+        </tr>
+        @foreach (Customer customer in Model)
+        {
+            <tr>
+                <td>@customer.FullName</td>
+                <td>@customer.Email</td>
+                <td>@customer.City</td>
+
+                <!-- Hidden Input
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@customer.Address</td>
+                <td>@customer.State</td>
+                <td>@customer.PostalCode</td>
+                <td>@customer.Country</td>
+                <td>@customer.Phone</td> -->
+                
+                
+                <td>
+                    <a asp-controller="Customer" asp-action="Edit"
+                       asp-route-id="@customer.CustomerID" class="btn btn-primary">EDIT</a>
+                </td>
+                <td>
+                    <a asp-controller="Customer" asp-action="Delete"
+                       asp-route-id="@customer.CustomerID" class="btn btn-primary">
+                        DELETE
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Customer" asp-action="Add" class="btn btn-primary">ADD Customers</a>
+
+
+
