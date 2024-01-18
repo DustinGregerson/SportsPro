@@ -1,5 +1,6 @@
 ﻿@model List<Technician>
 
+<h1>Technician Manager</h1>
 <table class="table table-bordered table-striped">
     <tbody>
     <tr>
@@ -15,16 +16,16 @@
             <td>@technician.Phone</td>
             <td>
                 <a asp-controller="Technician" asp-action="Edit"
-                       asp-route-id="@technician.TechnicianID" class="btn btn-primary">EDIT</a>
+                       asp-route-id="@technician.TechnicianID" class="btn btn-primary">Edit</a>
             </td>
             <td>
                 <a asp-controller="Technician" asp-action="Delete"
                        asp-route-id="@technician.TechnicianID" class="btn btn-primary">
-                        DELETE
+                        Delete
                 </a>
             </td>
         </tr>
     }
     </tbody>
 </table>
-<a asp-controller="Technician" asp-action="Add" class="btn btn-primary">ADD Technician</a>
+<a asp-controller="Technician" asp-action="Add" class="btn btn-primary">Add Technician</a>
