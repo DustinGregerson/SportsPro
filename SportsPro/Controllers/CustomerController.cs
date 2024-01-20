@@ -29,6 +29,7 @@ namespace SportsPro.Controllers
         {
             ViewBag.Action = "Add";
             Customer customer = new Customer();
+            ViewBag.Contries=context.Countries.ToList();
             return View("AddEdit", customer);
         }
         //Edit the Customer
@@ -37,12 +38,15 @@ namespace SportsPro.Controllers
         {
             Customer customer = context.Customers.Find(id);
             ViewBag.Action = "Edit";
+            ViewBag.Contries = context.Countries.ToList();
             return View("AddEdit", customer);
         }
 
         [HttpPost]
         public IActionResult AddEdit(Customer customer)
         {
+            customer.Country=context.Countries.Find(customer.CountryID);
+
             if (ModelState.IsValid)
             {
                 if (customer.CustomerID == 0)
@@ -59,6 +63,7 @@ namespace SportsPro.Controllers
             }
             else
             {
+                ViewBag.Contries = context.Countries.ToList();
                 return View("AddEdit", customer);
             }
         }

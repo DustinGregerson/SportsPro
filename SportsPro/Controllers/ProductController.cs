@@ -17,7 +17,6 @@ namespace SportsPro.Controllers
         {
             List<Product> products;
             products = context.Products.ToList();
-
             return View(products);
         }
         //Adding new Product to table

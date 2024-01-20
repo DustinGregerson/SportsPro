@@ -41,8 +41,21 @@
     </div>
     <!--Country-->
     <div class="form-group">
-        <label asp-for="Country">Country</label>
-    <input asp-for="Country" class="form-control" />
+        @if (Model.Country == null)
+        {
+            <label asp-for="CountryID">Country</label>
+            <select asp-for="CountryID" class="form-control"
+            asp-items="@(new SelectList(ViewBag.Contries,"CountryID","Name"))">
+                <option value="" hidden>Select a country...</option>
+            </select>
+        }
+        else{
+            <label asp-for="CountryID">Country</label>
+            <select asp-for="CountryID" class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Contries,"CountryID","Name"))">
+                        <option value="@Model.Country.Name">@Model.Country.Name</option>
+            </select>
+        }
     </div>
     <!--Email-->
     <div class="form-group">
