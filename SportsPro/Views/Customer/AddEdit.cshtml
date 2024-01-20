@@ -8,51 +8,61 @@
 <form asp-action="AddEdit" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <!--First Name-->
+ 
     <div class="form-group">
-        <label asp-for="FirstName">First Name</label> 
-        <input asp-for="FirstName" class="form-control" />
+    <label asp-for="FirstName" style="display: inline-block; width: 100px;">First Name</label>
+    <input asp-for="FirstName" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
     </div>
+
     <!--Last  Name-->
     <div class="form-group">
-        <label asp-for="LastName">Last Name</label>
-        <input asp-for="LastName" class="form-control" />
+        <label asp-for="LastName" style="display: inline-block; width: 100px;"> Last Name</label>
+        <input asp-for="LastName" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
     </div>
     <!--Address-->
     <div class="form-group">
-        <label asp-for="Address">Address</label>
-        <input asp-for="Address" class="form-control" />
+        <label asp-for="Address" style="display: inline-block; width: 100px;"> Address</label>
+        <input asp-for="Address" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
     </div>
     <!--City-->
     <div class="form-group">
-        <label asp-for="City">City</label>
-        <input asp-for="City" class="form-control" />
+        <label asp-for="City" style="display: inline-block; width: 100px;">City</label>
+        <input asp-for="City" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
     </div>
     <!--State-->
     <div class="form-group">
-        <label asp-for="State">State</label>
-        <input asp-for="State" class="form-control" />
+        <label asp-for="State" style="display: inline-block; width: 100px;">State</label>
+        <input asp-for="State" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
     </div>
    
     <!--Postal Code-->
     <div class="form-group">
-        <label asp-for="PostalCode">Postal Code</label>
-        <input asp-for="PostalCode" class="form-control" />
+        <label asp-for="PostalCode" style="display: inline-block; width: 100px;">Postal Code</label>
+        <input asp-for="PostalCode" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
     </div>
     <!--Country-->
     <div class="form-group">
-        <label asp-for="Country">Country</label>
-    <input asp-for="Country" class="form-control" />
+        <label asp-for="Country" style="display: inline-block; width: 100px;">Country</label>
+        <select asp-for="Country" class="form-control" style="display: inline-block; width: calc(100% - 110px);">
+            <option value="">Select Country</option>
+            @foreach (var country in (IEnumerable<SelectListItem>)ViewBag.Countries)
+            {
+                <option value="@country.Value">@country.Text</option>
+            }
+        </select>
     </div>
+
+
+
     <!--Email-->
     <div class="form-group">
-    <label asp-for="Email">Email</label>
-    <input asp-for="Email" class="form-control" />
+        <label asp-for="Email" style="display: inline-block; width: 100px;">Email</label>
+        <input asp-for="Email" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
     </div>
     <!--Phone-->
     <div class="form-group">
-        <label asp-for="Phone">Phone</label>
-        <input asp-for="Phone" class="form-control" />
+        <label asp-for="Phone" style="display: inline-block; width: 100px;">Phone</label>
+        <input asp-for="Phone" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
     </div>
     
     
