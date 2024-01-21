@@ -37,6 +37,7 @@ namespace SportsPro.Controllers
             Incident incident = new Incident();
             ViewBag.Customers = context.Customers.ToList();
             ViewBag.Technicians=context.Technicians.ToList();
+            ViewBag.Products = context.Products.ToList();
             return View("AddEdit", incident);
         }
 
@@ -47,6 +48,7 @@ namespace SportsPro.Controllers
             ViewBag.Action = "Edit";
             ViewBag.Customers = context.Customers.ToList();
            ViewBag.Technicians=context.Technicians.ToList();
+            ViewBag.Products = context.Products.ToList();
             return View("AddEdit", incident);
         }
 
@@ -55,7 +57,7 @@ namespace SportsPro.Controllers
         {
             incident.Customer=context.Customers.Find(incident.CustomerID);
             incident.Technician = context.Technicians.Find(incident.TechnicianID);
-            
+            incident.Product = context.Products.Find(incident.ProductID);
 
             if (ModelState.IsValid)
             {
@@ -75,6 +77,7 @@ namespace SportsPro.Controllers
             {
                 ViewBag.Customers = context.Customers.ToList();
                 ViewBag.Technicians = context.Technicians.ToList();
+                ViewBag.Products = context.Products.ToList();
                 return View("AddEdit", incident);
             }
         }

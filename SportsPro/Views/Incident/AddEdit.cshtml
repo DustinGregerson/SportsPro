@@ -35,10 +35,25 @@
         }
        
     </div>
-    
     <div class="form-group">
-        <label asp-for="ProductID">Product</label>
-        <input asp-for="Product" class="form-control" />
+        @if (Model.Product == null)
+        {
+            <label asp-for="ProductID">Product</label>
+            <select asp-for="ProductID" class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Products,"ProductID","Name"))">
+                <option value="" hidden>Select a Product...</option>
+            </select>
+
+        }
+        else
+        {
+            <label asp-for="ProductID">Product</label>
+            <select asp-for="ProductID" class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Products,"ProductID","Name"))">
+                <option value="@Model.Product.Name">@Model.Product.Name</option>
+            </select>
+        }
+
     </div>
     <div class="form-group">
         <label asp-for="Description">Description</label>
