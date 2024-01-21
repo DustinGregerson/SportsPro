@@ -7,7 +7,7 @@
         <tr>
             <th>Title</th>
             <th>Customer</th>
-            <th>Proudct</th>
+            <th>Product</th>
             <th>Date Opened</th>
             <th></th>
 
@@ -16,16 +16,17 @@
         {
             <tr>
                 <td>@incident.Title</td>
-                <td>@incident.Customer</td>
-                <td>@incident.Product</td>
+                <td>@incident.Customer.FullName</td>
+                <td>@incident.Product.Name</td>
                 <td>@incident.DateOpened</td>
+               
                 <td>
                     <a asp-controller="Incident" asp-action="Edit"
-                       asp-route-id="@incident.ProductID" class="btn btn-primary">Edit</a>
+                       asp-route-id="@incident.IncidentID" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
                     <a asp-controller="Incident" asp-action="Delete"
-                       asp-route-id="@incident.ProductID" class="btn btn-primary">
+                       asp-route-id="@incident.IncidentID" class="btn btn-primary">
                         Delete
                     </a>
                 </td>

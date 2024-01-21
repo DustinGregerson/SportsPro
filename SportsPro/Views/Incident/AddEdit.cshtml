@@ -1,7 +1,9 @@
 ﻿@model Incident
 
+
 @{
-    string title = ViewBag.Action + "Incident";
+    string title = ViewBag.Action + " Incident";
+   
     ViewBag.Title = title;
 }
 <h1>@ViewBag.Title</h1>
@@ -10,23 +12,68 @@
 
     <div class="form-group">
         <label asp-for="Title">Title</label>
-        <input asp-for="Title" class="form-control" />
+        <input asp-for="Title" class="form-control"/>
 
     </div>
     <div class="form-group">
-        <label asp-for="Customer">Customer</label>
-        <input asp-for="Customer" class="form-control" />
+        @if (Model.Customer == null)
+        {
+            <label asp-for="CustomerID">Customer</label>
+            <select asp-for="CustomerID" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Customers,"CustomerID","FullName"))">
+                <option value="" hidden>Select a Customer...</option>
+                </select>
+            
+        }
+        else
+        {
+            <label asp-for="CustomerID">Customer</label>
+            <select asp-for="CustomerID" class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Customers,"CustomerID","FullName"))">
+                <option value="@Model.Customer.FullName">@Model.Customer.FullName</option>
+            </select>
+        }
+       
     </div>
+    
     <div class="form-group">
-        <label asp-for="Product">Product</label>
+        <label asp-for="ProductID">Product</label>
         <input asp-for="Product" class="form-control" />
     </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        @if (Model.Technician == null)
+        {
+            <label asp-for="TechnicianID">Technician</label>
+            <select asp-for="TechnicianID" class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Technicians,"TechnicianID","Name"))">
+                <option value="" hidden>Select a Technician...</option>
+            </select>
+
+        }
+        else
+        {
+            <label asp-for="TechnicianID">Technician</label>
+            <select asp-for="TechnicianID" class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Technicians,"TechnicianID","Name"))">
+                <option value="@Model.Technician.Name">@Model.Technician.Name</option>
+            </select>
+        }
+
+    </div>
 
     <div class="form-group">
-        <label asp-for="DateOpened">DateOpened</label>
+        <label asp-for="DateOpened">Date Opened</label>
         <input asp-for="DateOpened" class="form-control" />
     </div>
-    <input asp-for="CustomerID" type=hidden />
+    <div class="form-group">
+        <label asp-for="DateClosed">Date Closed</label>
+        <input asp-for="DateClosed" class="form-control" />
+    </div>
+    <input asp-for="IncidentID" type=hidden />
     <button class="btn btn-primary" type="submit">Save</button>
     <a asp-action="List" class="btn btn-primary">Cancel</a>
 </form>

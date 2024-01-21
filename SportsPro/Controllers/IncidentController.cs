@@ -13,20 +13,30 @@ namespace SportsPro.Controllers
         {
             context = ctx;
         }
+       
 
         public IActionResult List()
         {
             List<Incident> incidents;
             incidents = context.Incidents.ToList();
-
+            List<Customer>customers;
+            customers = context.Customers.ToList();
+            List<Product> products;
+            products = context.Products.ToList();
+            List<Technician> technicians;
+            technicians = context.Technicians.ToList();
+            
             return View(incidents);
         }
+        
 
         [HttpGet]
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
             Incident incident = new Incident();
+            ViewBag.Customers = context.Customers.ToList();
+            ViewBag.Technicians=context.Technicians.ToList();
             return View("AddEdit", incident);
         }
 
@@ -35,15 +45,21 @@ namespace SportsPro.Controllers
         {
             Incident incident = context.Incidents.Find(id);
             ViewBag.Action = "Edit";
+            ViewBag.Customers = context.Customers.ToList();
+           ViewBag.Technicians=context.Technicians.ToList();
             return View("AddEdit", incident);
         }
 
         [HttpPost]
         public IActionResult AddEdit(Incident incident)
         {
+            incident.Customer=context.Customers.Find(incident.CustomerID);
+            incident.Technician = context.Technicians.Find(incident.TechnicianID);
+            
+
             if (ModelState.IsValid)
             {
-                if (incident.ProductID == 0)
+                if (incident.IncidentID == 0)
                 {
                     context.Incidents.Add(incident);
                 }
@@ -57,6 +73,8 @@ namespace SportsPro.Controllers
             }
             else
             {
+                ViewBag.Customers = context.Customers.ToList();
+                ViewBag.Technicians = context.Technicians.ToList();
                 return View("AddEdit", incident);
             }
         }
@@ -66,6 +84,7 @@ namespace SportsPro.Controllers
         public IActionResult Delete(int id)
         {
             Incident incident = context.Incidents.Find(id);
+
 
             if (incident == null)
             {
