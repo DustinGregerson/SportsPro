@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SportsPro.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,10 @@ namespace SportsPro.Controllers
         public IActionResult List()
         {
             List<Incident> incidents;
-            incidents = context.Incidents.ToList();
-            List<Customer>customers;
-            customers = context.Customers.ToList();
-            List<Product> products;
-            products = context.Products.ToList();
-            List<Technician> technicians;
-            technicians = context.Technicians.ToList();
+            incidents = context.Incidents
+                .Include(Q => Q.Product)
+                .Include(Q => Q.Technician)
+                .Include(Q => Q.Customer).ToList();
             
             return View(incidents);
         }
