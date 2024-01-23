@@ -12,7 +12,7 @@ namespace SportsPro.Controllers
         {
            context=ctx;
         }
-
+        [Route("products")]
         public IActionResult List()
         {
             List<Product> products;
