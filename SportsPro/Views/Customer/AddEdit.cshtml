@@ -42,14 +42,21 @@
     </div>
     <!--Country-->
     <div class="form-group">
-        <label asp-for="Country" style="display: inline-block; width: 100px;">Country</label>
-        <select asp-for="Country" class="form-control" style="display: inline-block; width: calc(100% - 110px);">
-            <option value="">Select Country</option>
-            @foreach (var country in (IEnumerable<SelectListItem>)ViewBag.Countries)
-            {
-                <option value="@country.Value">@country.Text</option>
-            }
-        </select>
+        @if (Model.Country == null)
+        {
+            <label asp-for="CountryID">Country</label>
+            <select asp-for="CountryID" class="form-control"
+            asp-items="@(new SelectList(ViewBag.Contries,"CountryID","Name"))">
+                <option value="" hidden>Select a country...</option>
+            </select>
+        }
+        else{
+            <label asp-for="CountryID">Country</label>
+            <select asp-for="CountryID" class="form-control"
+                    asp-items="@(new SelectList(ViewBag.Contries,"CountryID","Name"))">
+                        <option value="@Model.Country.Name">@Model.Country.Name</option>
+            </select>
+        }
     </div>
 
 

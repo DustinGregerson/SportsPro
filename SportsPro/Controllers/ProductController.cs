@@ -12,12 +12,11 @@ namespace SportsPro.Controllers
         {
            context=ctx;
         }
-
+        [Route("products")]
         public IActionResult List()
         {
             List<Product> products;
             products = context.Products.ToList();
-
             return View(products);
         }
         //Adding new Product to table

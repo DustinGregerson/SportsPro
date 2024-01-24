@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SportsPro.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,19 +15,27 @@ namespace SportsPro.Controllers
             context = ctx;
         }
 
+        [Route("incidents")]
         public IActionResult List()
         {
             List<Incident> incidents;
-            incidents = context.Incidents.ToList();
-
+            incidents = context.Incidents
+                .Include(Q => Q.Product)
+                .Include(Q => Q.Technician)
+                .Include(Q => Q.Customer).ToList();
+            
             return View(incidents);
         }
+        
 
         [HttpGet]
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
             Incident incident = new Incident();
+            ViewBag.Customers = context.Customers.ToList();
+            ViewBag.Technicians=context.Technicians.ToList();
+            ViewBag.Products = context.Products.ToList();
             return View("AddEdit", incident);
         }
 
@@ -35,15 +44,22 @@ namespace SportsPro.Controllers
         {
             Incident incident = context.Incidents.Find(id);
             ViewBag.Action = "Edit";
+            ViewBag.Customers = context.Customers.ToList();
+           ViewBag.Technicians=context.Technicians.ToList();
+            ViewBag.Products = context.Products.ToList();
             return View("AddEdit", incident);
         }
 
         [HttpPost]
         public IActionResult AddEdit(Incident incident)
         {
+            incident.Customer=context.Customers.Find(incident.CustomerID);
+            incident.Technician = context.Technicians.Find(incident.TechnicianID);
+            incident.Product = context.Products.Find(incident.ProductID);
+
             if (ModelState.IsValid)
             {
-                if (incident.ProductID == 0)
+                if (incident.IncidentID == 0)
                 {
                     context.Incidents.Add(incident);
                 }
@@ -57,6 +73,9 @@ namespace SportsPro.Controllers
             }
             else
             {
+                ViewBag.Customers = context.Customers.ToList();
+                ViewBag.Technicians = context.Technicians.ToList();
+                ViewBag.Products = context.Products.ToList();
                 return View("AddEdit", incident);
             }
         }
@@ -66,6 +85,7 @@ namespace SportsPro.Controllers
         public IActionResult Delete(int id)
         {
             Incident incident = context.Incidents.Find(id);
+
 
             if (incident == null)
             {
