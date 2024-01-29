@@ -17,6 +17,10 @@ namespace SportsPro.Controllers
         {
             List<Product> products;
             products = context.Products.ToList();
+
+            // the is the code that Pass TempData message to the view
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
+
             return View(products);
         }
         //Adding new Product to table
@@ -44,11 +48,15 @@ namespace SportsPro.Controllers
                 if (product.ProductID == 0)
                 {
                     context.Products.Add(product);
+                    //Here the code for tempData
+                    TempData["SuccessMessage"] = "Product added successfully!";
                 }
                 // the product from database have to Added
                 else
                 {
                     context.Products.Update(product);
+                    //Here is the message code
+                    TempData["SuccessMessage"] = "Product updated successfully!";
                 }
                 context.SaveChanges();
                 return RedirectToAction("List");
@@ -67,7 +75,8 @@ namespace SportsPro.Controllers
 
             if (product == null)
             {
-                return RedirectToAction("List", "Products");
+                // return RedirectToAction("List", "Products");
+                return NotFound();
             }
             else
             {
@@ -86,6 +95,8 @@ namespace SportsPro.Controllers
             {
                 context.Products.Remove(product);
                 context.SaveChanges();
+                //TempData Message
+                TempData["SuccessMessage"] = "Product deleted successfully!";
                 return RedirectToAction("List");
             }
         }

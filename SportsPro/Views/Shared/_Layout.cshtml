@@ -59,6 +59,22 @@
     <div class="container">
         <main role="main" class="pb-5">
             @RenderBody()
+
+            <!-- Display TempData message if it exists -->
+            @if (ViewBag.SuccessMessage != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @ViewBag.SuccessMessage
+                </div>
+            }
+
+            <!-- Display TempData error message if it exists -->
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
         </main>
     </div>
  
@@ -67,4 +83,4 @@
         <div class="container">&copy; @DateTime.Now.Year - SportsPro</div>
     </footer>
 </body>
-</html>
+</html>  
