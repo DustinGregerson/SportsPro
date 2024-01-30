@@ -14,7 +14,7 @@ namespace SportsPro.Controllers
            context=ctx;
         }
         [Route("products")]
-        public IActionResult List()
+        public ViewResult List()
         {
             List<Product> products;
             products = context.Products.ToList();
@@ -26,7 +26,7 @@ namespace SportsPro.Controllers
         }
         //Adding new Product to table
         [HttpGet]
-        public IActionResult Add()
+        public ViewResult Add()
         {
             ViewBag.Action = "Add";
             Product product = new Product();
@@ -34,7 +34,7 @@ namespace SportsPro.Controllers
         }
         //Edit the product
         [HttpGet]
-        public IActionResult Edit(int id)
+        public ViewResult Edit(int id)
         {
             Product product = context.Products.Find(id);
             ViewBag.Action = "Edit";
@@ -76,8 +76,8 @@ namespace SportsPro.Controllers
 
             if (product == null)
             {
-                // return RedirectToAction("List", "Products");
-                return NotFound();
+                return RedirectToAction("List", "Products");
+                
             }
             else
             {
@@ -86,7 +86,7 @@ namespace SportsPro.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Delete(Product product)
+        public RedirectToActionResult Delete(Product product)
         {
             if (product == null)
             {
