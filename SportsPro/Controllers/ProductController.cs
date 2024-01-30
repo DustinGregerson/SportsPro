@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace SportsPro.Controllers
 {
+
     public class ProductController : Controller
     {
         private SportsProContext context;
