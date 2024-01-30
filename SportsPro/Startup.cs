@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 using Microsoft.EntityFrameworkCore;
 using SportsPro.Models;
 
@@ -18,10 +17,28 @@ namespace SportsPro
 
         public IConfiguration Configuration { get; }
 
+
+    
         // Use this method to add services to the container.
+
+      
+        
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            ///session configuration when needed
+            //services.AddMemoryCache();
+            //services.AddSession();
+            //services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson();
+            /*
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = System.TimeSpan.FromSeconds(5);
+                options.Cookie.HttpOnly = false;
+                options.Cookie.IsEssential = true;
+            });
+            */
+
 
             services.AddDbContext<SportsProContext>(options =>
                 options.UseSqlServer(
@@ -52,6 +69,8 @@ namespace SportsPro
             app.UseRouting();
 
             app.UseAuthorization();
+            //use the session when needed
+            //app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
