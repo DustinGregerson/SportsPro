@@ -19,13 +19,16 @@ namespace SportsPro.Controllers
         {
             List<Technician> technicians;
             technicians = context.Technicians.ToList();
+            // the is the code that Pass TempData message to the view
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
+
             return View(technicians);
         }
         [HttpGet]
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
-            Technician technician = new Technician(); 
+            Technician technician = new Technician();
             return View("AddEdit",technician);
         }
         [HttpGet]
@@ -46,14 +49,20 @@ namespace SportsPro.Controllers
                 {
 
                     context.Technicians.Add(technician);
-                    
+
+                    //Here the code for tempData
+                    TempData["SuccessMessage"] = "Product added successfully!";
+
                 }
                 //else the technician is in the database and needs to be added
                 else
                 {
                     context.Technicians.Update(technician);
-                    
-                   
+
+                    //Here is the message code
+                    TempData["SuccessMessage"] = "Product updated successfully!";
+
+
                 }
                 context.SaveChanges();
                 return RedirectToAction("List");
@@ -89,6 +98,9 @@ namespace SportsPro.Controllers
             {
                 context.Technicians.Remove(technician);
                 context.SaveChanges();
+                //TempData Message
+                TempData["SuccessMessage"] = "Product deleted successfully!";
+
                 return RedirectToAction("List");
             }
         }

@@ -22,6 +22,9 @@ namespace SportsPro.Controllers
     customers;
             customers = context.Customers.ToList();
 
+            // the is the code that Pass TempData message to the view
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
+
             return View(customers);
         }
         //Adding new Customer to table
@@ -53,11 +56,17 @@ namespace SportsPro.Controllers
                 if (customer.CustomerID == 0)
                 {
                     context.Customers.Add(customer);
+
+                    //Here the code for tempData
+                    TempData["SuccessMessage"] = "Product added successfully!";
                 }
                 // the customer from database have to Added
                 else
                 {
                     context.Customers.Update(customer);
+
+                    //Here the code for tempData
+                    TempData["SuccessMessage"] = "Product added successfully!";
                 }
                 context.SaveChanges();
                 return RedirectToAction("List");
@@ -96,6 +105,10 @@ namespace SportsPro.Controllers
             {
                 context.Customers.Remove(customer);
                 context.SaveChanges();
+
+                //TempData Message
+                TempData["SuccessMessage"] = "Product deleted successfully!";
+
                 return RedirectToAction("List");
             }
         }

@@ -23,7 +23,9 @@ namespace SportsPro.Controllers
                 .Include(Q => Q.Product)
                 .Include(Q => Q.Technician)
                 .Include(Q => Q.Customer).ToList();
-            
+            // the is the code that Pass TempData message to the view
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
+
             return View(incidents);
         }
         
@@ -62,11 +64,17 @@ namespace SportsPro.Controllers
                 if (incident.IncidentID == 0)
                 {
                     context.Incidents.Add(incident);
+
+                    //Here the code for tempData
+                    TempData["SuccessMessage"] = "Product added successfully!";
                 }
                
                 else
                 {
                     context.Incidents.Update(incident);
+
+                    //Here is the message code
+                    TempData["SuccessMessage"] = "Product updated successfully!";
                 }
                 context.SaveChanges();
                 return RedirectToAction("List");
@@ -108,6 +116,8 @@ namespace SportsPro.Controllers
             {
                 context.Incidents.Remove(incident);
                 context.SaveChanges();
+                //TempData Message
+                TempData["SuccessMessage"] = "Product deleted successfully!";
                 return RedirectToAction("List");
             }
         }
