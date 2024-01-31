@@ -51,7 +51,7 @@ namespace SportsPro.Controllers
                     context.Technicians.Add(technician);
 
                     //Here the code for tempData
-                    TempData["SuccessMessage"] = "Product added successfully!";
+                    TempData["SuccessMessage"] = "Technician added successfully!";
 
                 }
                 //else the technician is in the database and needs to be added
@@ -60,7 +60,7 @@ namespace SportsPro.Controllers
                     context.Technicians.Update(technician);
 
                     //Here is the message code
-                    TempData["SuccessMessage"] = "Product updated successfully!";
+                    TempData["SuccessMessage"] = "Technician updated successfully!";
 
 
                 }
@@ -99,7 +99,7 @@ namespace SportsPro.Controllers
                 context.Technicians.Remove(technician);
                 context.SaveChanges();
                 //TempData Message
-                TempData["SuccessMessage"] = "Product deleted successfully!";
+                TempData["SuccessMessage"] = "Technician deleted successfully!";
 
                 return RedirectToAction("List");
             }

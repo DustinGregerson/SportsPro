@@ -58,7 +58,7 @@ namespace SportsPro.Controllers
                     context.Customers.Add(customer);
 
                     //Here the code for tempData
-                    TempData["SuccessMessage"] = "Product added successfully!";
+                    TempData["SuccessMessage"] = "Customer added successfully!";
                 }
                 // the customer from database have to Added
                 else
@@ -66,7 +66,7 @@ namespace SportsPro.Controllers
                     context.Customers.Update(customer);
 
                     //Here the code for tempData
-                    TempData["SuccessMessage"] = "Product added successfully!";
+                    TempData["SuccessMessage"] = "Customer added successfully!";
                 }
                 context.SaveChanges();
                 return RedirectToAction("List");
@@ -107,7 +107,7 @@ namespace SportsPro.Controllers
                 context.SaveChanges();
 
                 //TempData Message
-                TempData["SuccessMessage"] = "Product deleted successfully!";
+                TempData["SuccessMessage"] = "Customer deleted successfully!";
 
                 return RedirectToAction("List");
             }

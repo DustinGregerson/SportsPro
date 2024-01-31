@@ -66,7 +66,7 @@ namespace SportsPro.Controllers
                     context.Incidents.Add(incident);
 
                     //Here the code for tempData
-                    TempData["SuccessMessage"] = "Product added successfully!";
+                    TempData["SuccessMessage"] = "Incident added successfully!";
                 }
                
                 else
@@ -74,7 +74,7 @@ namespace SportsPro.Controllers
                     context.Incidents.Update(incident);
 
                     //Here is the message code
-                    TempData["SuccessMessage"] = "Product updated successfully!";
+                    TempData["SuccessMessage"] = "Incident updated successfully!";
                 }
                 context.SaveChanges();
                 return RedirectToAction("List");
@@ -117,7 +117,7 @@ namespace SportsPro.Controllers
                 context.Incidents.Remove(incident);
                 context.SaveChanges();
                 //TempData Message
-                TempData["SuccessMessage"] = "Product deleted successfully!";
+                TempData["SuccessMessage"] = "Incident deleted successfully!";
                 return RedirectToAction("List");
             }
         }
