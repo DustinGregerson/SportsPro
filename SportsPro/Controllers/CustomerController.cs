@@ -66,7 +66,7 @@ namespace SportsPro.Controllers
                     context.Customers.Update(customer);
 
                     //Here the code for tempData
-                    TempData["SuccessMessage"] = "Customer added successfully!";
+                    TempData["SuccessMessage"] = "Customer Updated successfully!";
                 }
                 context.SaveChanges();
                 return RedirectToAction("List");
