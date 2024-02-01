@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using SportsPro.Models;
 using System.Collections.Generic;
@@ -18,46 +19,38 @@ namespace SportsPro.Controllers
         [Route("incidents")]
         public IActionResult List()
         {
-            List<Incident> incidents;
-            incidents = context.Incidents
-                .Include(Q => Q.Product)
-                .Include(Q => Q.Technician)
-                .Include(Q => Q.Customer).ToList();
-            // the is the code that Pass TempData message to the view
-            ViewBag.SuccessMessage = TempData["SuccessMessage"];
+            IncidentViewModelList incidentViewModelList = new IncidentViewModelList(context,"");
 
-            return View(incidents);
+
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
+            return View(incidentViewModelList);
         }
         
 
         [HttpGet]
         public IActionResult Add()
         {
-            ViewBag.Action = "Add";
-            Incident incident = new Incident();
-            ViewBag.Customers = context.Customers.ToList();
-            ViewBag.Technicians=context.Technicians.ToList();
-            ViewBag.Products = context.Products.ToList();
-            return View("AddEdit", incident);
+            IncidentViewModelAddEdit incidentViewModelAddEdit = new IncidentViewModelAddEdit();
+            incidentViewModelAddEdit.addOrEdit = "Add";
+            incidentViewModelAddEdit.incident = new Incident();
+            incidentViewModelAddEdit.setLists(context);
+            return View("AddEdit", incidentViewModelAddEdit);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Incident incident = context.Incidents.Find(id);
-            ViewBag.Action = "Edit";
-            ViewBag.Customers = context.Customers.ToList();
-           ViewBag.Technicians=context.Technicians.ToList();
-            ViewBag.Products = context.Products.ToList();
-            return View("AddEdit", incident);
+            IncidentViewModelAddEdit incidentViewModelAddEdit = new IncidentViewModelAddEdit();
+            incidentViewModelAddEdit.setListsAndFindPTC(id, context);
+            return View("AddEdit", incidentViewModelAddEdit);
         }
 
         [HttpPost]
-        public IActionResult AddEdit(Incident incident)
+        public IActionResult AddEdit(IncidentViewModelAddEdit incidentViewModelAddEdit)
         {
-            incident.Customer=context.Customers.Find(incident.CustomerID);
-            incident.Technician = context.Technicians.Find(incident.TechnicianID);
-            incident.Product = context.Products.Find(incident.ProductID);
+            Incident incident = incidentViewModelAddEdit.incident;
+
+
 
             if (ModelState.IsValid)
             {
@@ -81,10 +74,11 @@ namespace SportsPro.Controllers
             }
             else
             {
-                ViewBag.Customers = context.Customers.ToList();
-                ViewBag.Technicians = context.Technicians.ToList();
-                ViewBag.Products = context.Products.ToList();
-                return View("AddEdit", incident);
+
+                incidentViewModelAddEdit.setListsAndFindPTC(context);
+
+                return View("AddEdit", incidentViewModelAddEdit);
+                
             }
         }
 

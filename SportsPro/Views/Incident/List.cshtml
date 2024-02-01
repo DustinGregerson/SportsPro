@@ -1,5 +1,6 @@
-﻿@model List<Incident>
+﻿@model IncidentViewModelList
 @{
+    
 }
 <h1>Incident Manager</h1>
 <table class="table table-bordered table-striped">
@@ -12,7 +13,7 @@
             <th></th>
 
         </tr>
-        @foreach (Incident incident in Model)
+        @foreach (Incident incident in Model.incidents)
         {
             <tr>
                 <td>@incident.Title</td>
