@@ -1,28 +1,30 @@
 ﻿@model List<Incident>
 
-    <h1>Technician: @ViewBag.TechName</h1>
-    <br>
-    @if(Model.Count==0){
-        <h2 class="text-warning">Does Not Have Any Open Incidents Assigned</h2>
-    }
-    else{
+<h1>Technician: @ViewBag.TechName</h1>
+<br>
+@if (Model.Count == 0)
+{
+    <h2 class="text-warning">Does Not Have Any Open Incidents Assigned</h2>
+}
+else
+{
     <h1>Assigned/Open Incidents</h1>
-        <table class="table table-bordered table-striped">
-            <tr>
-                <th>
-                    Title
-                </th>
-                <th>
-                    Customer
-                </th>
-                <th>
-                    Product
-                </th>
-                <th>
-                    Date Opened
-                </th>
-            </tr>
-        @foreach(Incident incident in Model)
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Customer
+            </th>
+            <th>
+                Product
+            </th>
+            <th>
+                Date Opened
+            </th>
+        </tr>
+        @foreach (Incident incident in Model)
         {
             <tr>
                 <td>
@@ -43,4 +45,5 @@
             </tr>
         }
     </table>
-    }
+}
+<a asp-action="Edit" class="btn btn-primary">Switch Technician</a>

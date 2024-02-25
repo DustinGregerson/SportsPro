@@ -2,7 +2,7 @@
 <h1>
     Technician
 </h1>
-<form asp-action="incidentsByTechnician">
+<form asp-action="List">
     <span class="text-danger">@ViewBag.Error</span>
     <select name="id" class="form-control"
             asp-items="@(new SelectList(Model,"TechnicianID","Name"))">

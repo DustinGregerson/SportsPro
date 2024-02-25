@@ -26,18 +26,18 @@ namespace SportsPro
         public void ConfigureServices(IServiceCollection services)
         {
             ///session configuration when needed
-            //services.AddMemoryCache();
-            //services.AddSession();
-            //services.AddControllersWithViews();
-            services.AddControllersWithViews().AddNewtonsoftJson();
-            /*
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddControllersWithViews();
+            //services.AddControllersWithViews().AddNewtonsoftJson();
+            
             services.AddSession(options =>
             {
                 options.IdleTimeout = System.TimeSpan.FromSeconds(5);
                 options.Cookie.HttpOnly = false;
                 options.Cookie.IsEssential = true;
             });
-            */
+            
 
 
             services.AddDbContext<SportsProContext>(options =>
@@ -65,7 +65,7 @@ namespace SportsPro
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

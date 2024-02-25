@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using SportsPro.Models;
@@ -129,51 +130,8 @@ namespace SportsPro.Controllers
             ViewBag.SuccessMessage = TempData["SuccessMessage"];
             return View(incidentViewModelList);
         }
-        public IActionResult listByTech(string error)
-        {
-            List<Technician> technicans = context.Technicians.ToList();
 
-            if (error != null)
-            {
-                ViewBag.Error=error;
-            }
 
-            return View("Get",technicans);
-        }
-        public IActionResult IncidentsByTechnician(string id)
-        {
-            int? techId=null;
-            string error = "";
-            if (id != null)
-            {
-                try
-                {
-                    techId = int.Parse(id);
-                }
-                catch
-                {
-                    error = "DO NOT MANIPULATE THE HTML";
-                   
-                    return RedirectToAction("ListByTech",new {error= error });
-                }
-
-            }
-            else
-            {
-                error = "You must select a technician.";
-                return RedirectToAction("ListByTech",new {error= error });
-            }
-        
-
-            List<Incident>incidents = context.Incidents
-            .Include(Q => Q.Product)
-            .Include(Q => Q.Technician)
-            .Include(Q => Q.Customer).Where(q=>q.TechnicianID==techId).ToList();
-
-            Technician tech = context.Technicians.Find(techId);
-            ViewBag.TechName = tech.Name;
-            return View(incidents);
-        }
 
 
     }
