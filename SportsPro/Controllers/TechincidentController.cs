@@ -63,5 +63,15 @@ namespace SportsPro.Controllers
             ViewBag.TechName = tech.Name;
             return View(incidents);
         }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            IncidentViewModelAddEdit incidentViewModelAddEdits = new IncidentViewModelAddEdit();
+            incidentViewModelAddEdits.setListsAndFindPTC(id, context);
+            
+           
+            return View("Edit", incidentViewModelAddEdits);
+        }
+
     }
 }

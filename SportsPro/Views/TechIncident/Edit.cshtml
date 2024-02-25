@@ -1,0 +1,48 @@
+﻿@model IncidentViewModelAddEdit
+@{
+
+}
+<h1>@ViewBag.Title</h1>
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+       
+            <label asp-for="incident.TechnicianID">Technician:  @Model.technician.Name</label>
+
+    </div>
+    <div class="form-group">
+
+        <label asp-for="incident.CustomerID">Customer:  @Model.customer.FullName </label>
+        
+
+    </div>
+    <div class="form-group">
+
+        <label asp-for="incident.ProductID">Product: @Model.product.Name</label>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="incident.Title">Title:    @Model.incident.Title</label>
+       
+       
+
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="incident.DateOpened">Date Opened: @Model.incident.DateOpened</label> 
+       
+    </div>
+    <div class="form-group">
+        <label asp-for="incident.Description">Description</label>
+        <input asp-for="incident.Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="incident.DateClosed">Date Closed</label>
+        <input asp-for="incident.DateClosed" class="form-control" />
+    </div>
+
+    <input asp-for="addOrEdit" type=hidden />
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a asp-action="List" class="btn btn-primary">Cancel</a>
+    
+
+</form>
