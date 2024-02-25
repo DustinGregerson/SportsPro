@@ -27,8 +27,11 @@ namespace SportsPro.Controllers
             // Set default filter type, e.g., "All"
             incidentViewModelAddEdit.FilterType = "";
 
+
             return View("AddEdit", incidentViewModelAddEdit);
         }
+
+
 
         [HttpGet]
         public IActionResult Edit(int id)
@@ -48,7 +51,7 @@ namespace SportsPro.Controllers
             {
                 if (incident.IncidentID == 0)
                 {
-                    // New incident, set default values based on filterType
+                    // here the New incident
                     if (ViewBag.FilterType == "Unassigned")
                     {
                         incident.TechnicianID = null; // Unassigned incident
@@ -115,7 +118,7 @@ namespace SportsPro.Controllers
         {
             IncidentViewModelList incidentViewModelList;
 
-            // Set the ViewBag.FilterType to be used in the view
+            // here is the code Set the ViewBag.FilterType to be used in the view
             ViewBag.FilterType = filterType;
 
             if (string.IsNullOrEmpty(filterType) || filterType == "All")
@@ -132,7 +135,7 @@ namespace SportsPro.Controllers
             }
             else
             {
-                // Handle invalid filterType or other cases
+                // here to the code to Handle invalid filterType 
                 return RedirectToAction("List");
             }
 

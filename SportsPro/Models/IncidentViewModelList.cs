@@ -19,5 +19,6 @@ namespace SportsPro.Models
         public List<Incident> incidents { get; set; }
         public string filter { get; set; }
         public string FilterType { get; set; }
+
     }
 }
