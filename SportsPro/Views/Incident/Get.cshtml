@@ -1,0 +1,13 @@
+﻿@model List<Technician>
+<h1>
+    Technician
+</h1>
+<form asp-action="incidentsByTechnician">
+    <span class="text-danger">@ViewBag.Error</span>
+    <select name="id" class="form-control"
+            asp-items="@(new SelectList(Model,"TechnicianID","Name"))">
+        <option value="" hidden>Select a Technician...</option>
+    </select>
+    <br>
+    <button class="btn btn-primary" type="submit">Select</button>
+</form>

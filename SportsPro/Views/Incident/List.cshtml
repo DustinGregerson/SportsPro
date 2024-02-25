@@ -7,16 +7,16 @@
 <!-- Bootstrap pills navigation -->
 <ul class="nav nav-pills mb-3">
     <li class="nav-item">
-        <a class="nav-link @(string.IsNullOrEmpty(ViewBag.FilterType) ? "active" : "")"
-           asp-action="List" asp-route-filterType="" role="tab">All Incidents</a>
+        <a class="nav-link @(string.IsNullOrEmpty(ViewBag.FilterType) || ViewBag.FilterType=="All" ? "active" : "")"
+           asp-action="List" asp-route-filter="All" role="tab">All Incidents</a>
     </li>
     <li class="nav-item">
         <a class="nav-link @(ViewBag.FilterType == "Unassigned" ? "active" : "")"
-           asp-action="List" asp-route-filterType="Unassigned" role="tab">Unassigned Incidents</a>
+           asp-action="List" asp-route-filter="Unassigned" role="tab">Unassigned Incidents</a>
     </li>
     <li class="nav-item">
         <a class="nav-link @(ViewBag.FilterType == "Open" ? "active" : "")"
-           asp-action="List" asp-route-filterType="Open" role="tab">Open Incidents</a>
+           asp-action="List" asp-route-filter="Open" role="tab">Open Incidents</a>
     </li>
 </ul>
 

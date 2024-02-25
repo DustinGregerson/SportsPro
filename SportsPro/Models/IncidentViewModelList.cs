@@ -8,12 +8,32 @@ namespace SportsPro.Models
     public class IncidentViewModelList
     {
         public IncidentViewModelList(SportsProContext context,string filter) {
-            incidents = context.Incidents.ToList();
-            incidents = context.Incidents
+            this.filter= filter;
+            if(filter == null||filter=="All")
+            {
+                incidents = context.Incidents
                 .Include(Q => Q.Product)
                 .Include(Q => Q.Technician)
-                .Include(Q => Q.Customer).ToList();
-            this.filter= filter;
+                .Include(Q => Q.Customer)
+                .ToList();
+            }
+            else if(filter == "Unassigned")
+            {
+                incidents = context.Incidents
+                .Include(Q => Q.Product)
+                .Include(Q => Q.Customer)
+                .Where(Q=>Q.TechnicianID==null)
+                .ToList();
+            }
+            else if(filter == "Open")
+            {
+                incidents = context.Incidents
+                .Include(Q => Q.Product)
+                .Include(Q => Q.Technician)
+                .Include(Q => Q.Customer)
+                .Where(Q=>Q.DateClosed==null)
+                .ToList();
+            }
         }
 
         public List<Incident> incidents { get; set; }

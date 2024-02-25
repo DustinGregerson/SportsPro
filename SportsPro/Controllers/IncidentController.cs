@@ -52,11 +52,11 @@ namespace SportsPro.Controllers
                 if (incident.IncidentID == 0)
                 {
                     // here the New incident
-                    if (ViewBag.FilterType == "Unassigned")
+                    if (incidentViewModelAddEdit.FilterType == "Unassigned")
                     {
                         incident.TechnicianID = null; // Unassigned incident
                     }
-                    else if (ViewBag.FilterType == "Open")
+                    else if (incidentViewModelAddEdit.FilterType == "Open")
                     {
                         incident.DateClosed = null; // Open incident
                     }
@@ -71,7 +71,7 @@ namespace SportsPro.Controllers
                 }
 
                 context.SaveChanges();
-                return RedirectToAction("List", new { filterType = ViewBag.FilterType });
+                return RedirectToAction("List", new { filterType = incidentViewModelAddEdit.FilterType });
 
             }
             else
@@ -114,33 +114,65 @@ namespace SportsPro.Controllers
             }
         }
         [Route("incidents")]
-        public IActionResult List(string filterType)
+        public IActionResult List(string filter)
         {
-            IncidentViewModelList incidentViewModelList;
-
+            IncidentViewModelList incidentViewModelList=new IncidentViewModelList(context,filter);
+            if (filter == "")
+            {
+                filter = "All";
+            }
+            ViewBag.FilterType = filter;
             // here is the code Set the ViewBag.FilterType to be used in the view
-            ViewBag.FilterType = filterType;
 
-            if (string.IsNullOrEmpty(filterType) || filterType == "All")
-            {
-                incidentViewModelList = new IncidentViewModelList(context, "");
-            }
-            else if (filterType == "Unassigned")
-            {
-                incidentViewModelList = new IncidentViewModelList(context, "Unassigned");
-            }
-            else if (filterType == "Open")
-            {
-                incidentViewModelList = new IncidentViewModelList(context, "Open");
-            }
-            else
-            {
-                // here to the code to Handle invalid filterType 
-                return RedirectToAction("List");
-            }
+            
 
             ViewBag.SuccessMessage = TempData["SuccessMessage"];
             return View(incidentViewModelList);
+        }
+        public IActionResult listByTech(string error)
+        {
+            List<Technician> technicans = context.Technicians.ToList();
+
+            if (error != null)
+            {
+                ViewBag.Error=error;
+            }
+
+            return View("Get",technicans);
+        }
+        public IActionResult IncidentsByTechnician(string id)
+        {
+            int? techId=null;
+            string error = "";
+            if (id != null)
+            {
+                try
+                {
+                    techId = int.Parse(id);
+                }
+                catch
+                {
+                    error = "DO NOT MANIPULATE THE HTML";
+                   
+                    return RedirectToAction("ListByTech",new {error= error });
+                }
+
+            }
+            else
+            {
+                error = "You must select a technician.";
+                return RedirectToAction("ListByTech",new {error= error });
+            }
+        
+
+            List<Incident>incidents = context.Incidents
+            .Include(Q => Q.Product)
+            .Include(Q => Q.Technician)
+            .Include(Q => Q.Customer).Where(q=>q.TechnicianID==techId).ToList();
+
+            Technician tech = context.Technicians.Find(techId);
+            ViewBag.TechName = tech.Name;
+            return View(incidents);
         }
 
 

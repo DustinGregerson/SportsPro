@@ -43,12 +43,12 @@
                     Technicians
                 </a>
                 <a class="nav-link
-             @(controller == "Incident" ? "active" : "")"
+             @(controller == "Incident" && action!="IncidentsByTechnician" && action != "listByTech" ? "active" : "")"
                    asp-controller="Incident" asp-action="List">
                     Incidents
                 </a>
                 <a class="nav-link
-           @(controller == "Home" && action == "About" ?
+             @(controller == "Home" && action == "About" ?
                            "active" : "")"
                    asp-controller="Home" asp-action="About">About</a>
             </div>
