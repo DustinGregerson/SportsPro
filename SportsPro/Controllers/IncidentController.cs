@@ -9,23 +9,12 @@ namespace SportsPro.Controllers
 {
     public class IncidentController : Controller
     {
-
         private SportsProContext context;
+
         public IncidentController(SportsProContext ctx)
         {
             context = ctx;
         }
-
-        [Route("incidents")]
-        public IActionResult List()
-        {
-            IncidentViewModelList incidentViewModelList = new IncidentViewModelList(context,"");
-
-
-            ViewBag.SuccessMessage = TempData["SuccessMessage"];
-            return View(incidentViewModelList);
-        }
-        
 
         [HttpGet]
         public IActionResult Add()
@@ -34,6 +23,10 @@ namespace SportsPro.Controllers
             incidentViewModelAddEdit.addOrEdit = "Add";
             incidentViewModelAddEdit.incident = new Incident();
             incidentViewModelAddEdit.setLists(context);
+
+            // Set default filter type, e.g., "All"
+            incidentViewModelAddEdit.FilterType = "";
+
             return View("AddEdit", incidentViewModelAddEdit);
         }
 
@@ -42,6 +35,7 @@ namespace SportsPro.Controllers
         {
             IncidentViewModelAddEdit incidentViewModelAddEdit = new IncidentViewModelAddEdit();
             incidentViewModelAddEdit.setListsAndFindPTC(id, context);
+
             return View("AddEdit", incidentViewModelAddEdit);
         }
 
@@ -50,44 +44,45 @@ namespace SportsPro.Controllers
         {
             Incident incident = incidentViewModelAddEdit.incident;
 
-
-
             if (ModelState.IsValid)
             {
                 if (incident.IncidentID == 0)
                 {
-                    context.Incidents.Add(incident);
+                    // New incident, set default values based on filterType
+                    if (ViewBag.FilterType == "Unassigned")
+                    {
+                        incident.TechnicianID = null; // Unassigned incident
+                    }
+                    else if (ViewBag.FilterType == "Open")
+                    {
+                        incident.DateClosed = null; // Open incident
+                    }
 
-                    //Here the code for tempData
+                    context.Incidents.Add(incident);
                     TempData["SuccessMessage"] = "Incident added successfully!";
                 }
-               
                 else
                 {
                     context.Incidents.Update(incident);
-
-                    //Here is the message code
                     TempData["SuccessMessage"] = "Incident updated successfully!";
                 }
+
                 context.SaveChanges();
-                return RedirectToAction("List");
+                return RedirectToAction("List", new { filterType = ViewBag.FilterType });
+
             }
             else
             {
-
                 incidentViewModelAddEdit.setListsAndFindPTC(context);
-
                 return View("AddEdit", incidentViewModelAddEdit);
-                
             }
         }
 
-        //here is the for Delete 
+
         [HttpGet]
         public IActionResult Delete(int id)
         {
             Incident incident = context.Incidents.Find(id);
-
 
             if (incident == null)
             {
@@ -95,14 +90,14 @@ namespace SportsPro.Controllers
             }
             else
             {
-
                 return View(incident);
             }
         }
+
         [HttpPost]
         public IActionResult Delete(Incident incident)
         {
-            if (incident== null)
+            if (incident == null)
             {
                 return RedirectToAction("List");
             }
@@ -115,5 +110,36 @@ namespace SportsPro.Controllers
                 return RedirectToAction("List");
             }
         }
+        [Route("incidents")]
+        public IActionResult List(string filterType)
+        {
+            IncidentViewModelList incidentViewModelList;
+
+            // Set the ViewBag.FilterType to be used in the view
+            ViewBag.FilterType = filterType;
+
+            if (string.IsNullOrEmpty(filterType) || filterType == "All")
+            {
+                incidentViewModelList = new IncidentViewModelList(context, "");
+            }
+            else if (filterType == "Unassigned")
+            {
+                incidentViewModelList = new IncidentViewModelList(context, "Unassigned");
+            }
+            else if (filterType == "Open")
+            {
+                incidentViewModelList = new IncidentViewModelList(context, "Open");
+            }
+            else
+            {
+                // Handle invalid filterType or other cases
+                return RedirectToAction("List");
+            }
+
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
+            return View(incidentViewModelList);
+        }
+
+
     }
 }

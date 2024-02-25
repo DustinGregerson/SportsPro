@@ -18,6 +18,7 @@ namespace SportsPro.Models
         public Customer customer { get; set; }
 
         public string addOrEdit { get; set; }
+        public string FilterType { get; set; }
 
         //This method only sets the lists
         public void setLists(SportsProContext context)
