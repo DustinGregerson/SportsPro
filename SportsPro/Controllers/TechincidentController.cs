@@ -72,6 +72,23 @@ namespace SportsPro.Controllers
            
             return View("Edit", incidentViewModelAddEdits);
         }
+        [HttpPost]
+        public IActionResult Edit(IncidentViewModelAddEdit incidentViewModelAddEdit)
+        {
+            Incident incident = incidentViewModelAddEdit.incident;
+            if (ModelState.IsValid)
+            {
+               
+                context.Incidents.Update(incident);
+
+                context.SaveChanges();
+                return RedirectToAction("get");
+            }
+            else
+            {
+                return View("List", incident);
+            }
+        }
 
     }
 }
