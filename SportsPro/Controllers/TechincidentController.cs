@@ -78,7 +78,7 @@ namespace SportsPro.Controllers
             Incident incident = incidentViewModelAddEdit.incident;
             if (ModelState.IsValid)
             {
-               
+                
                 context.Incidents.Update(incident);
 
                 context.SaveChanges();
