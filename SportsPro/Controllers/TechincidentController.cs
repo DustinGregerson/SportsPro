@@ -57,7 +57,10 @@ namespace SportsPro.Controllers
             List<Incident> incidents = context.Incidents
             .Include(Q => Q.Product)
             .Include(Q => Q.Technician)
-            .Include(Q => Q.Customer).Where(q => q.TechnicianID == techId).ToList();
+            .Include(Q => Q.Customer)
+            .Where(q => q.TechnicianID == techId)
+            .Where(q=>q.DateClosed==null)
+            .ToList();
 
             Technician tech = context.Technicians.Find(techId);
             ViewBag.TechName = tech.Name;
@@ -82,7 +85,7 @@ namespace SportsPro.Controllers
                 context.Incidents.Update(incident);
 
                 context.SaveChanges();
-                return RedirectToAction("List");
+                return RedirectToAction("List",new {id=""+incident.TechnicianID });
             }
             else
             {

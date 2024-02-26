@@ -43,8 +43,9 @@
     </div>
 
     <input asp-for="incident.Technician"hidden />
+    <input asp-for="incident.IncidentID"></>
     <button class="btn btn-primary" type="submit">Save</button>
-    <a asp-action="List" class="btn btn-primary">Cancel</a>
+    <a asp-action="List" asp-route-id="@Model.incident.TechnicianID" class="btn btn-primary">Cancel</a>
     
     <input asp-for="incident.IncidentID" hidden />
 </form>
