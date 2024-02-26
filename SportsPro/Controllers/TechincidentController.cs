@@ -78,15 +78,15 @@ namespace SportsPro.Controllers
             Incident incident = incidentViewModelAddEdit.incident;
             if (ModelState.IsValid)
             {
-                
+               
                 context.Incidents.Update(incident);
 
                 context.SaveChanges();
-                return RedirectToAction("get");
+                return RedirectToAction("List");
             }
             else
             {
-                return View("List", incident);
+                return View("Edit", incident);
             }
         }
 
