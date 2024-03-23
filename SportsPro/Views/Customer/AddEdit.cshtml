@@ -17,34 +17,40 @@
  
     <div class="form-group">
     <label asp-for="FirstName" style="display: inline-block; width: 100px;">First Name</label>
-    <input asp-for="FirstName" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
+    <input asp-for="FirstName" class="form-control" style="display: inline-block; width: calc(70% - 110px);" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
 
     <!--Last  Name-->
     <div class="form-group">
         <label asp-for="LastName" style="display: inline-block; width: 100px;"> Last Name</label>
-        <input asp-for="LastName" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
+        <input asp-for="LastName" class="form-control" style="display: inline-block; width: calc(70% - 110px);" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <!--Address-->
     <div class="form-group">
         <label asp-for="Address" style="display: inline-block; width: 100px;"> Address</label>
-        <input asp-for="Address" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
+        <input asp-for="Address" class="form-control" style="display: inline-block; width: calc(70% - 110px);" />
+        <span asp-validation-for="Address" class="text-danger"></span>
     </div>
     <!--City-->
     <div class="form-group">
         <label asp-for="City" style="display: inline-block; width: 100px;">City</label>
-        <input asp-for="City" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
+        <input asp-for="City" class="form-control" style="display: inline-block; width: calc(70% - 110px);" />
+        <span asp-validation-for="City" class="text-danger"></span>
     </div>
     <!--State-->
     <div class="form-group">
         <label asp-for="State" style="display: inline-block; width: 100px;">State</label>
-        <input asp-for="State" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
+        <input asp-for="State" class="form-control" style="display: inline-block; width: calc(70% - 110px);" />
+        <span asp-validation-for="State" class="text-danger"></span>
     </div>
    
     <!--Postal Code-->
     <div class="form-group">
         <label asp-for="PostalCode" style="display: inline-block; width: 100px;">Postal Code</label>
-        <input asp-for="PostalCode" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
+        <input asp-for="PostalCode" class="form-control" style="display: inline-block; width: calc(70% - 110px);" />
+        <span asp-validation-for="PostalCode" class="text-danger"></span>
     </div>
     <!--Country-->
     <div class="form-group">
@@ -55,12 +61,14 @@
             asp-items="@(new SelectList(ViewBag.Contries,"CountryID","Name"))">
                 <option value="" hidden>Select a country...</option>
             </select>
+            <span asp-validation-for="CountryID" class="text-danger"></span>
         }
         else{
             <label asp-for="CountryID">Country</label>
             <select asp-for="CountryID" class="form-control"
                     asp-items="@(new SelectList(ViewBag.Contries,"CountryID","Name"))">
                         <option value="@Model.Country.Name">@Model.Country.Name</option>
+
             </select>
         }
     </div>
@@ -70,12 +78,14 @@
     <!--Email-->
     <div class="form-group">
         <label asp-for="Email" style="display: inline-block; width: 100px;">Email</label>
-        <input asp-for="Email" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
+        <input asp-for="Email" class="form-control" style="display: inline-block; width: calc(70% - 110px);" />
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <!--Phone-->
     <div class="form-group">
         <label asp-for="Phone" style="display: inline-block; width: 100px;">Phone</label>
-        <input asp-for="Phone" class="form-control" style="display: inline-block; width: calc(100% - 110px);" />
+        <input asp-for="Phone" class="form-control" style="display: inline-block; width: calc(70% - 110px);" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
     </div>
     
     
@@ -83,4 +93,3 @@
     <button class="btn btn-primary" type="submit">Save</button>
     <a asp-action="List" class="btn btn-primary">Cancel</a>
 </form>
-
