@@ -1,0 +1,49 @@
+﻿@model RegistrationViewModel
+
+
+<h1>Customer: @Model.customer.FullName <br> Registrations</h1>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            Product
+        </th>
+        <th>
+
+        </th>
+    </tr>
+    @if (Model.registrations.Count > 0)
+    {
+        @foreach (Registration registration in Model.registrations)
+        {
+            <tr>
+                <td>
+                    @registration.Product.Name
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@registration.Product.ProductID" class="btn btn-primary">Delete</a>
+                </td>            
+            </tr>
+        }
+
+    }
+    else
+    {
+        <tr>
+            <td>This customer does not have any registered products.</td>
+        </tr>
+    }
+</table>
+
+@if(Model.UnregisteredProducts.Count>1){
+<form asp-action="registerProduct">
+<h2>Product</h2>
+    <select asp-for="registerProductId" class="form-control"
+            asp-items="@(new SelectList(Model.UnregisteredProducts,"ProductID","Name"))">
+        <option value="Select a Product..." hidden>Select a Product...</option>
+    </select>
+    <button class="btn btn-primary">Register</button>
+</form>
+}
+else{
+    <h2>Customer is regestered to all products</h2>
+}

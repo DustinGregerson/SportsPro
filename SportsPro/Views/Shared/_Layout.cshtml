@@ -48,6 +48,9 @@
                     Incidents
                 </a>
                 <a class="nav-link
+               @(controller == "Registration" ? "active" : "")"
+                   asp-controller="Registration" asp-action="GetCustomer">Registration</a>
+                <a class="nav-link
              @(controller == "Home" && action == "About" ?
                            "active" : "")"
                    asp-controller="Home" asp-action="About">About</a>

@@ -1,0 +1,12 @@
+﻿@model Customer
+
+<h1>Get Customers</h1>
+<form method="post" asp-action="Registrations">
+    <label asp-for="CustomerID">Customer</label>
+    <select asp-for="CustomerID" class="form-control"
+            asp-items="@(new SelectList(ViewBag.Customers,"CustomerID","FullName"))">
+    </select>
+    <br>
+    <button type="submit" class="btn btn-primary">Select</button>
+</form>
+

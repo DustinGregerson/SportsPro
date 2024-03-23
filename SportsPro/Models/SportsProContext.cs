@@ -15,6 +15,7 @@ namespace SportsPro.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Incident> Incidents { get; set; }
 
+        public DbSet<Registration> Registrations { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().HasData(
@@ -281,7 +282,7 @@ namespace SportsPro.Models
                     CustomerID = 1015,
                     ProductID = 6,
                     TechnicianID = 15,
-                    Title = "Could not install",                    
+                    Title = "Could not install",
                     Description = "Setup failed with code 104.",
                     DateOpened = DateTime.Parse("2020-01-08"),
                     DateClosed = DateTime.Parse("2020-01-10")
@@ -292,12 +293,21 @@ namespace SportsPro.Models
                     CustomerID = 1010,
                     ProductID = 3,
                     TechnicianID = null,
-                    Title = "Error launching program",                    
+                    Title = "Error launching program",
                     Description = "Program fails with error code 510, unable to open database.",
                     DateOpened = DateTime.Parse("2020-01-10"),
                     DateClosed = null
                 }
             );
+
+            modelBuilder.Entity<Registration>().HasData(
+                new Registration
+                {
+                    RegistrationID = 1,
+                    CustomerID = 1002,
+                    ProductID = 1
+                }
+            ); 
         }
     }
 }
