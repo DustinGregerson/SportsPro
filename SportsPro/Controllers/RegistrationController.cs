@@ -20,10 +20,9 @@ namespace SportsPro.Controllers
             List<Customer> customers = new List<Customer>();
             customers = context.Customers.ToList();
             ViewBag.Customers = customers;
-
-            return View(new Customer());
+            return View();
         }
-
+        [Route("Registrations")]
         public IActionResult Registrations(Customer customer)
         {
 
@@ -34,6 +33,7 @@ namespace SportsPro.Controllers
             HttpContext.Session.SetString("customerID", customer.CustomerID.ToString());
             return View(viewModel);
         }
+        
         public IActionResult registerProduct(RegistrationViewModel viewModel)
         {
             Customer customer = new Customer();

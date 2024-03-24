@@ -39,11 +39,10 @@
 <h2>Product</h2>
     <select asp-for="registerProductId" class="form-control"
             asp-items="@(new SelectList(Model.UnregisteredProducts,"ProductID","Name"))">
-        <option value="Select a Product..." hidden>Select a Product...</option>
     </select>
     <button class="btn btn-primary">Register</button>
 </form>
 }
 else{
-    <h2>Customer is regestered to all products</h2>
+    <h2>Customer is registered to all products</h2>
 }

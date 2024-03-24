@@ -33,7 +33,7 @@ namespace SportsPro
             
             services.AddSession(options =>
             {
-                options.IdleTimeout = System.TimeSpan.FromSeconds(5);
+                options.IdleTimeout = System.TimeSpan.FromHours(2);
                 options.Cookie.HttpOnly = false;
                 options.Cookie.IsEssential = true;
             });
@@ -53,6 +53,8 @@ namespace SportsPro
         // Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSession();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -65,7 +67,6 @@ namespace SportsPro
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
