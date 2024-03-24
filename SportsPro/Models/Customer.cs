@@ -50,11 +50,13 @@ namespace SportsPro.Models
         public string CountryID { get; set; }
 		public Country Country { get; set; }
 
-       [Required(ErrorMessage = "Phone number must be in (999) 999-999 format.")]
-        [MaxLength(14, ErrorMessage = "Phone number cannot be more than 14 characters.")]
-        [MinLength(14, ErrorMessage = "Phone number must be in (999) 999-999 format.")]
-        [RegularExpression(@"^\(\d{3}\)\s*\d{3}-\d{4}$", ErrorMessage = "Phone number must be in (999) 999-9999 format.")]
+        [Required(ErrorMessage = "Phone number is required.")]
+        [StringLength(14)]
+        [RegularExpression(@"^\(\d{3}\)\s*\d{3}-\d{4}$", ErrorMessage = "Phone number must be in the format (999) 999-9999.")]
         public string Phone { get; set; }
+
+
+
 
         [Required(ErrorMessage = "Please enter a valid email address.")]
         [StringLength(51)]
