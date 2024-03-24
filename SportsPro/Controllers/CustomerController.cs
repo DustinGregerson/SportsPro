@@ -18,8 +18,7 @@ namespace SportsPro.Controllers
         [Route("customers")]
         public IActionResult List()
         {
-            List<Customer>
-    customers;
+            List<Customer> customers;
             customers = context.Customers.ToList();
 
             // the is the code that Pass TempData message to the view

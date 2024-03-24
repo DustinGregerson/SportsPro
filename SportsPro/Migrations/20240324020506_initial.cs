@@ -62,15 +62,15 @@ namespace SportsPro.Migrations
                 {
                     CustomerID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(51)", maxLength: 51, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(51)", maxLength: 51, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(51)", maxLength: 51, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(51)", maxLength: 51, nullable: false),
+                    State = table.Column<string>(type: "nvarchar(51)", maxLength: 51, nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
                     CountryID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(51)", maxLength: 51, nullable: false)
                 },
                 constraints: table =>
                 {
