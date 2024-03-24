@@ -63,10 +63,6 @@ namespace SportsPro.Models
         [DataType(DataType.EmailAddress, ErrorMessage = "Email is not valid")]
         public string Email { get; set; }
 
-
-   
-
-
         public string FullName => FirstName + " " + LastName;   // read-only property
 	}
 }
