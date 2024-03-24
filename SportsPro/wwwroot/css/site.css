@@ -6,6 +6,7 @@ h1 {
     font-size: 20pt;
 }
 
+
 /* Sticky footer styles
 -------------------------------------------------- */
 
@@ -16,6 +17,7 @@ h1 {
 html {
   position: relative;
   min-height: 100%;
+  
 }
 
 body {
@@ -28,4 +30,8 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 40px; /* Vertically center the text there */
+}
+.input-validation-error {
+    border: 2px solid red;
+    background-color: blanchedalmond ;
 }
