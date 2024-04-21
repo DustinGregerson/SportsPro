@@ -123,7 +123,7 @@ namespace SportsPro.Controllers
                 filter = "All";
             }
             ViewBag.FilterType = filter;
-            // here is the code Set the ViewBag.FilterType to be used in the view
+            // here is the code that sets the ViewBag.FilterType to be used in the view
 
             
 

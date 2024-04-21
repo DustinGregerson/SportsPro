@@ -26,7 +26,7 @@ namespace SportsPro.Controllers
         public IActionResult Registrations(Customer customer)
         {
 
-
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
             RegistrationViewModel viewModel = new RegistrationViewModel(context, customer.CustomerID);
             viewModel.getRegistrationsForCustomer(context);
             viewModel.getUnregisteredProductsLists(context);
@@ -48,6 +48,7 @@ namespace SportsPro.Controllers
 
             context.Add(registration);
             context.SaveChanges();
+            TempData["SuccessMessage"] = "Registration added successfully!";
             return RedirectToAction("Registrations", customer);
         }
         public IActionResult Delete(int id)
@@ -62,6 +63,7 @@ namespace SportsPro.Controllers
                            .FirstOrDefault();
             context.Remove(registration);
             context.SaveChanges();
+            TempData["SuccessMessage"] = "Registration deleted successfully!";
             return RedirectToAction("Registrations", customer);
 
         }
