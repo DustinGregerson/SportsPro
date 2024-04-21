@@ -46,7 +46,7 @@ namespace SportsPro.Models
         [RegularExpression("^[0-9]+$", ErrorMessage = "postal code must be numeric")]
         public string PostalCode { get; set; }
 
-        [Required(ErrorMessage = "Required.")]
+        [Required(ErrorMessage = "Country is Required.")]
         public string CountryID { get; set; }
 		public Country Country { get; set; }
 
