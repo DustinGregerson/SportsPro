@@ -39,7 +39,7 @@ namespace SportsPro.Controllers
         {
             IncidentViewModelAddEdit incidentViewModelAddEdit = new IncidentViewModelAddEdit();
             incidentViewModelAddEdit.setListsAndFindPTC(id, context);
-
+            incidentViewModelAddEdit.addOrEdit = "Edit";
             return View("AddEdit", incidentViewModelAddEdit);
         }
 
